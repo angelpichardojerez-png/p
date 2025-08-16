@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmacia Eden 2</title>
+  <link rel="icon" href="medicamentos\icon.ico" type="image/x-icon"></favicon>
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+    producto {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    /* Menú de categorías en fila y centrado */
+.nav-bar ul {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  list-style: none;
+  margin: 18px 0 30px 0;
+  padding: 0;
+}
+
+.nav-bar li {
+  display: inline-block;
+}
+
+.nav-bar .nav-item {
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+  </style>
+
+ </head>
+ <body>
+  <header>   
+    <center><img src="medicamentos\11111111111.png" height="300" width="300""></center>
+   <H3><p>Aceptamos tarjetas de crédito, débito y transferencia </p></H3>
+    <H3><p>Aceptamos seguros (senasa, Mafred, humanos, universal, yunen, entre otros)</p></H3>
+    <H3><p>Para mas informacion llamar al +1(809) 595-5430</p></H3>
+  </header>
+  
+  <input type="text" id="buscador" placeholder="Buscar..." style="width: 400px; height: 40px;" onkeyup="filtrar()">
+  
+  <nav class="nav-bar">
+    <ul>
+      <li><a href="#" class="nav-item active" onclick="filtrarCategoria(event, 'Todos')">Todos</a></li>
+      <li><a href="#" class="nav-item" onclick="filtrarCategoria(event, 'Medicamentos')">Medicamentos</a></li>
+      <li><a href="#" class="nav-item" onclick="filtrarCategoria(event, 'Higiene')">Higiene</a></li>
+      <li><a href="#" class="nav-item" onclick="filtrarCategoria(event, 'Bebé')"> Bebé</a></li>
+      <li><a href="#" class="nav-item" onclick="filtrarCategoria(event, 'Cuidado')">Cuidado</a></li>
+    </ul>
+  </nav>
+
+  <div id="contenido">
+    <!-- Elimina el div de lista-productos -->
+    <!-- <div id="lista-productos">
+      <div class="Producto ia">access</div>
+      <div class="Producto automatizacion">word</div>
+      <div class="Producto ia">react</div>
+      <div class="Producto seguridad">Java script</div>
+    </div> -->
+  </div>
+<script>
+  function filtrar() {
+    const input = document.getElementById('buscador').value.toLowerCase();
+
+    // Solo filtra las tarjetas de producto
+    const tarjetas = document.querySelectorAll('.tarjeta');
+    tarjetas.forEach(function(tarjeta) {
+      const nombreProducto = tarjeta.querySelector('h3').textContent.toLowerCase();
+      tarjeta.style.display = nombreProducto.startsWith(input) ? '' : 'none';
+    });
+  }
+
+  function filtrarCategoria(event, categoria) {
+    event.preventDefault();
+
+    // Quitar clase 'active' de todos los enlaces
+    document.querySelectorAll('.nav-item').forEach(function(item) {
+      item.classList.remove('active');
+    });
+    // Agregar clase 'active' al enlace seleccionado
+    event.target.classList.add('active');
+
+    // Filtrar solo las tarjetas de producto
+    document.querySelectorAll('.tarjeta').forEach(function(tarjeta) {
+      if (categoria === 'todos' || tarjeta.classList.contains(categoria)) {
+        tarjeta.style.display = '';
+      } else {
+        tarjeta.style.display = 'none';
+      }
+    });
+  }
+
+  // Mostrar detalles en modal
+  document.querySelectorAll('.btn-detalles').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const tarjeta = btn.closest('.tarjeta');
+      document.getElementById('modal-img').src = tarjeta.querySelector('img').src;
+      document.getElementById('modal-titulo').textContent = tarjeta.querySelector('h3').textContent;
+      document.getElementById('modal-descripcion').textContent = tarjeta.querySelector('p').textContent;
+      document.getElementById('modal-detalles').style.display = 'flex';
+    });
+  });
+
+  // Cerrar modal
+  document.getElementById('cerrar-modal').onclick = function() {
+    document.getElementById('modal-detalles').style.display = 'none';
+  };
+
+  // Cerrar modal al hacer clic fuera del contenido
+  document.getElementById('modal-detalles').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.style.display = 'none';
+    }
+  });
+</script>
+
+
+  <main>
+    <section class="tarjetas-producto">
+      <div class="tarjeta Medicamentos"><img src="medicamentos\medicamentos\12.jpeg" width="100" height="100">
+        <h3>Paracetamol bayer 500mg</h3>
+        <p>10RD uni., 90RD tira, 500RD caja</p>
+        <button class="btn-detalles">Ver Detalles</button>
+      </div>
+
+
+      <div class="tarjeta Higiene"><img src="medicamentos\higuene\14.jpeg" width="100" height="100">
+        <h3>Gel Antibacterial</h3>
+        <p>100RD.</p>
+        <button class="btn-detalles">Ver Detalles</button>
+      </div>
+
+
+      <div class="tarjeta Bebé"><img src="medicamentos\bebe\13.jpeg" width="100" height="100">
+        <h3>Pañales size m</h3>
+        <p>250RD paq.</p>
+        <button class="btn-detalles">Ver Detalles</button>
+      </div>
+
+
+      <div class="tarjeta Cuidado"><img src="medicamentos\cuidado\15.jpeg" width="100" height="100">
+        <h3>crema hidratante</h3>
+        <p>200RD.</p>
+        <button class="btn-detalles">Ver Detalles</button>
+        </div>
+
+
+        <div class="tarjeta Medicamentos"><img src="medicamentos\medicamentos\ace.jpeg" width="100" height="100">
+        <h3>acetaminofen bayer</h3>
+        <p>10RD uni., tira 50RD, 200RD caja</p>
+        <button class="btn-detalles">Ver Detalles</button>
+      </div>
+
+
+      <div class="tarjeta Medicamentos"><img src="medicamentos\medicamentos\ace2.jpeg" width="100" height="100">
+        <h3>acetaminofen MK</h3>
+        <p>10RD uni., tira 50RD, 200RD caja</p>
+        <button class="btn-detalles">Ver Detalles</button>
+      </div>
+
+
+      <div class="tarjeta Bebé"><img src="medicamentos\bebe\hisopos.jpeg" width="100" height="100">
+        <h3>Hisopos</h3>
+        <p> 200RD caja</p>
+        <button class="btn-detalles">Ver Detalles</button>
+      </div>
+
+   <div class="tarjeta Bebé"><img src="medicamentos\bebe\wipes.jpeg" width="100" height="100">
+        <h3>wipes</h3>
+        <p>200RD caja</p>
+        <button class="btn-detalles">Ver Detalles</button>
+      </div>
+
+
+      <div class="tarjeta Cuidado"><img src="medicamentos\cuidado\pro s.jpeg" width="100" height="100">
+        <h3>Protector solar Nivea</h3>
+        <p>250RD.</p>
+        <button class="btn-detalles">Ver Detalles</button>
+        </div>
+
+
+        <div class="tarjeta Cuidado"><img src="medicamentos\cuidado\deso.jpeg" width="100" height="100">
+        <h3>desodorante rexona</h3>
+        <p>200RD</p>
+        <button class="btn-detalles">Ver Detalles</button>
+      </div>
+
+       <div class="tarjeta Higiene"><img src="medicamentos\higuene\asecia.jpeg" width="100" height="100">
+        <h3>Jabon asepsia</h3>
+        <p>200RD</p>
+        <button class="btn-detalles">Ver Detalles</button>
+        </div>
+
+
+        <div class="tarjeta Higiene"><img src="medicamentos\higuene\corgate.jpeg" width="100" height="100">
+        <h3>Pasta dentar corgate</h3>
+        <p>200RD</p>
+        <button class="btn-detalles">Ver Detalles</button>
+        </div>
+    </section>
+  </main>
+
+  <!-- Modal para mostrar detalles -->
+  <div id="modal-detalles" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:1000;">
+    <div style="background:#fff; padding:30px 20px; border-radius:10px; max-width:350px; width:90%; position:relative; text-align:center;">
+      <span id="cerrar-modal" style="position:absolute; top:10px; right:18px; font-size:1.5rem; cursor:pointer;">&times;</span>
+      <img id="modal-img" src="" alt="" style="width:100px; height:100px; margin-bottom:15px; border-radius:8px;">
+      <h3 id="modal-titulo"></h3>
+      <p id="modal-descripcion"></p>
+    </div>
+  </div>
+
+  <script>
+    function filtrar() {
+      const input = document.getElementById('buscador').value.toLowerCase();
+      const tarjetas = document.querySelectorAll('.tarjeta');
+      tarjetas.forEach(function(tarjeta) {
+        const nombreProducto = tarjeta.querySelector('h3').textContent.toLowerCase();
+        tarjeta.style.display = nombreProducto.startsWith(input) ? '' : 'none';
+      });
+    }
+
+    function filtrarCategoria(event, categoria) {
+      event.preventDefault();
+      document.querySelectorAll('.nav-item').forEach(function(item) {
+        item.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      document.querySelectorAll('.tarjeta').forEach(function(tarjeta) {
+        if (categoria === 'todos' || tarjeta.classList.contains(categoria)) {
+          tarjeta.style.display = '';
+        } else {
+          tarjeta.style.display = 'none';
+        }
+      });
+    }
+
+    // Mostrar detalles en modal
+    document.querySelectorAll('.btn-detalles').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const tarjeta = btn.closest('.tarjeta');
+        document.getElementById('modal-img').src = tarjeta.querySelector('img').src;
+        document.getElementById('modal-titulo').textContent = tarjeta.querySelector('h3').textContent;
+        document.getElementById('modal-descripcion').textContent = tarjeta.querySelector('p').textContent;
+        document.getElementById('modal-detalles').style.display = 'flex';
+      });
+    });
+
+    // Cerrar modal
+    document.getElementById('cerrar-modal').onclick = function() {
+      document.getElementById('modal-detalles').style.display = 'none';
+    };
+
+    // Cerrar modal al hacer clic fuera del contenido
+    document.getElementById('modal-detalles').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
